@@ -1,0 +1,24 @@
+name: Keep Streamlit Awake
+
+on:
+  schedule:
+    - cron: "*/25 * * * *"  # Every 25 minutes
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run wake script
+        run: python wake_streamlit.py
